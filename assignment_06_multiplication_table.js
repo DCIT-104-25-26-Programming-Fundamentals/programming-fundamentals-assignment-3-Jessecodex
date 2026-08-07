@@ -58,5 +58,43 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require("readline-sync");
 
+function printTable(num) {
+  console.log(`Multiplication Table for ${num}:`);
+  for (let i = 1; i <= 12; i++) {
+    console.log(`${num} x ${String(i).padEnd(2)} = ${num * i}`);
+  }
+}
 
+function printTablesUpTo(n) {
+  for (let num = 1; num <= n; num++) {
+    printTable(num);
+    console.log("-".repeat(27));
+  }
+}
+
+function main() {
+  console.log("Multiplication Table Generator");
+  console.log("1. Single table");
+  console.log("2. Tables from 1 to N");
+  const choice = readlineSync.questionInt("\nChoose an option (1-2): ");
+
+  if (choice === 1) {
+    const num = readlineSync.questionInt("Enter a number: ");
+    printTable(num);
+  } else if (choice === 2) {
+    const n = readlineSync.questionInt("Enter N: ");
+
+    if (n <= 0) {
+      console.log("Error: N must be a positive integer.");
+      return;
+    }
+
+    printTablesUpTo(n);
+  } else {
+    console.log("Error: Invalid choice. Please select 1 or 2.");
+  }
+}
+
+main();
